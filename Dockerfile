@@ -14,7 +14,7 @@ ENV MCR_NUM        v92
 # RUN wget https://ssd.mathworks.com/supportfiles/downloads/R2015b/deployment_files/R2015b/installers/glnxa64/MCR_R2015b_glnxa64_installer.zip \
 #RUN wget https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip \
 #    unzip MCR_R2017a_glnxa64_installer.zip \
-    wget \
+RUN wget \
     unzip \
     xorg \
     && apt-get clean \
