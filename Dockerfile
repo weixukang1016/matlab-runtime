@@ -13,6 +13,7 @@ ENV MCR_NUM        v92
 RUN wget https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
 
 # Add MCR intall files
+mkdir /mcr-install
 ADD MCR_R2017a_glnxa64_installer.zip /mcr-install
 ADD mcr-config.txt /mcr-install/mcr-config.txt
 
