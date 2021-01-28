@@ -20,11 +20,11 @@ ENV MCR_NUM        v92
 #    && apt-get clean \
 #    && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
+RUN wget MCR_${MCR_VERSION}.zip https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
 
 # Add MCR intall files
 #ADD MCR_${MCR_VERSION}.zip /mcr-install/mcr.zip
-ADD MCR_R2017a_glnxa64_installer.zip /mcr-install
+ADD MCR_${MCR_VERSION}.zip /mcr-install
 ADD mcr-config.txt /mcr-install/mcr-config.txt
 
 # Install MatLab runtime
