@@ -1,5 +1,5 @@
 #FROM java:8-jre
-FROM eec-center
+FROM swr.cn-north-4.myhuaweicloud.com/pvsoul/eec-center:1
 # Set Java environment variables
 ENV JAVA_HOME      /usr/bin/java
 ENV PATH           ${PATH}:${JAVA_HOME}/bin
