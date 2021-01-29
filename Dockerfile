@@ -7,9 +7,8 @@ ENV MATLAB_JAVA    ${JAVA_HOME}
 ENV MCR_VERSION    R2017a
 ENV MCR_NUM        v92
 # Install packages
-RUN mkdir /mcr-install
-#COPY mcr-config.txt /mcr-install/mcr-config.txt
-RUN wget -O /mcr-install/MCR_R2017a_glnxa64_installer.zip https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
+RUN mkdir /mcr-install \
+   && wget -O /mcr-install/MCR_R2017a_glnxa64_installer.zip https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
 # Install MatLab runtime
 RUN cd /mcr-install \
     && unzip MCR_R2017a_glnxa64_installer.zip \
@@ -24,3 +23,11 @@ ENV LD_LIBRARY_PATH    ${LD_LIBRARY_PATH}:\
 /opt/mcr/v92/bin/glnxa64:\
 /opt/mcr/v92/sys/os/glnxa64:\
 /opt/mcr/v92/sys/opengl/lib/glnxa64
+#下载并安装补丁包
+RUN mkdir /mcr-update \
+   && wget -O /mcr-update/glnxa64/MCR_R2017a_Update_3_glnxa64.sh https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_Update_3_glnxa64.sh
+# Install MatLab runtime
+RUN cd /mcr-update \
+    && ./install -mode silent -agreeToLicense yes \
+    && cd / \
+    && rm -rf /mcr-update
