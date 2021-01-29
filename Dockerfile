@@ -6,6 +6,8 @@ ENV PATH           ${PATH}:${JAVA_HOME}/bin
 ENV MATLAB_JAVA    ${JAVA_HOME}
 ENV MCR_VERSION    R2017a
 ENV MCR_NUM        v92
+RUN apt-get update \
+ && apt-get install sudo
 # Install packages
 RUN mkdir /mcr-install \
    && wget -O /mcr-install/MCR_R2017a_glnxa64_installer.zip https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
@@ -28,7 +30,7 @@ RUN mkdir /mcr-update \
    && wget -O /opt/mcr/MCR_R2017a_Update_3_glnxa64.sh https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_Update_3_glnxa64.sh
 # Install MatLab runtime
 RUN cd /opt/mcr \
-    && sudo chmod -R 777 \
+    && sudo chmod -R 777 ./MCR_R2017a_Update_3_glnxa64.sh \
     && ./MCR_R2017a_Update_3_glnxa64.sh -mode silent -agreeToLicense yes \
 #    && cd / \
     && rm -rf ./MCR_R2017a_Update_3_glnxa64.sh
