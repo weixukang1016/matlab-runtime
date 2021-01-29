@@ -8,13 +8,13 @@ ENV MCR_VERSION    R2017a
 ENV MCR_NUM        v92
 # Install packages
 RUN mkdir /mcr-install
-COPY mcr-config.txt /mcr-install/mcr-config.txt
+#COPY mcr-config.txt /mcr-install/mcr-config.txt
 RUN wget -O /mcr-install/MCR_R2017a_glnxa64_installer.zip https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
 # Install MatLab runtime
 RUN cd /mcr-install \
     && unzip MCR_R2017a_glnxa64_installer.zip \
     && mkdir /opt/mcr \
-    && ./install -inputFile mcr-config.txt \
+    && ./install -mode silent -agreeToLicense yes \
     && cd / \
     && rm -rf /mcr-install
 # Set MCR environment variables
