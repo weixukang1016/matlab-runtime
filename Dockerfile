@@ -1,4 +1,5 @@
-FROM java:8-jre
+#FROM java:8-jre
+FROM eec-center
 # Set Java environment variables
 ENV JAVA_HOME      /usr/bin/java
 ENV PATH           ${PATH}:${JAVA_HOME}/bin
@@ -25,9 +26,9 @@ ENV LD_LIBRARY_PATH    ${LD_LIBRARY_PATH}:\
 /opt/mcr/v92/sys/opengl/lib/glnxa64
 #下载并安装补丁包
 RUN mkdir /mcr-update \
-   && wget -O /mcr-update/MCR_R2017a_Update_3_glnxa64.sh https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_Update_3_glnxa64.sh
+   && wget -O /opt/mcr/MCR_R2017a_Update_3_glnxa64.sh https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_Update_3_glnxa64.sh
 # Install MatLab runtime
-RUN cd /mcr-update \
+RUN cd /opt/mcr \
     && ./MCR_R2017a_Update_3_glnxa64.sh -mode silent -agreeToLicense yes \
-    && cd / \
-    && rm -rf /mcr-update
+#    && cd / \
+    && rm -rf ./MCR_R2017a_Update_3_glnxa64.sh
