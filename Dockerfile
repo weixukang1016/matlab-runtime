@@ -29,6 +29,6 @@ RUN mkdir /mcr-update \
 # Install MatLab runtime
 RUN cd /opt/mcr \
     && chmod 777 MCR_R2017a_Update_3_glnxa64.sh \
-    && ./MCR_R2017a_Update_3_glnxa64.sh -mode silent -agreeToLicense yes \
+    && ./MCR_R2017a_Update_3_glnxa64.sh -s \
 #    && cd / \
     && rm -rf ./MCR_R2017a_Update_3_glnxa64.sh
