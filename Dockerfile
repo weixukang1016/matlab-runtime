@@ -7,6 +7,7 @@ ENV PATH           ${PATH}:${JAVA_HOME}/bin
 ENV MATLAB_JAVA    ${JAVA_HOME}
 ENV MCR_VERSION    R2017a
 ENV MCR_NUM        v92
+#默认安装路径为：/usr/local/MATLAB/MATLAB_Runtime
 ENV MCR_ROOT       /usr/local/MATLAB/MATLAB_Runtime
 # Install packages
 RUN mkdir /mcr-install \
