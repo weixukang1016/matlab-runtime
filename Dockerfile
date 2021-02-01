@@ -1,4 +1,5 @@
-FROM openjdk:8u181-jdk-alpine
+#FROM openjdk:8u181-jdk-alpine
+FROM java:8-jre
 # Set Java environment variables
 ENV JAVA_HOME      /usr/bin/java
 ENV PATH           ${PATH}:${JAVA_HOME}/bin
