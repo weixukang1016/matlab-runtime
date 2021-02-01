@@ -9,7 +9,6 @@ ENV MCR_VERSION    R2017a
 ENV MCR_NUM        v92
 # Install packages
 RUN mkdir /mcr-install \
-    && mkdir /opt \
     && mkdir /opt/mcr \
    && wget -O /mcr-install/MCR_R2017a_glnxa64_installer.zip https://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip
 # Install MatLab runtime
