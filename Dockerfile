@@ -1,4 +1,4 @@
-FROM sjava:8-jre
+FROM java:8-jre
 RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/MCR_R2017b_glnxa64_installer.zip https://ssd.mathworks.com/supportfiles/downloads/R2017b/deployment_files/R2017b/installers/glnxa64/MCR_R2017b_glnxa64_installer.zip \
