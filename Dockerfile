@@ -20,7 +20,8 @@ ${MCR_ROOT}/${MCR_NUM}/bin/glnxa64:\
 ${MCR_ROOT}/${MCR_NUM}/sys/os/glnxa64:\
 ${MCR_ROOT}/${MCR_NUM}/sys/opengl/lib/glnxa64
 # 安装补丁包
-RUN chmod 777 MCR_R2017a_Update_3_glnxa64.sh \
+RUN cd /mcr-install \
+    && chmod 777 ./MCR_R2017a_Update_3_glnxa64.sh \
     && ./MCR_R2017a_Update_3_glnxa64.sh -s
 #删除下载的文件
 RUN cd / \
