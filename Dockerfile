@@ -3,7 +3,7 @@ RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/libxt_1.2.0.orig.tar.gz https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libxt/1:1.2.0-1/libxt_1.2.0.orig.tar.gz \
    && unzip libxt_1.2.0.orig.tar.gz \
-   && && ./INSTALL \
+   && ./INSTALL \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
     && unzip MATLAB_Runtime.zip
 # Set Java environment variables
