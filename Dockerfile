@@ -1,8 +1,8 @@
 FROM java:8-jre
 RUN mkdir /mcr-install \
    && cd /mcr-install \
-   && wget -O /mcr-install/MCR_R2017b_glnxa64_installer.zip https://ssd.mathworks.com/supportfiles/downloads/R2017b/deployment_files/R2017b/installers/glnxa64/MCR_R2017b_glnxa64_installer.zip \
-    && unzip MCR_R2017b_glnxa64_installer.zip
+   && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
+    && unzip MATLAB_Runtime.zip
 # Set Java environment variables
 ENV JAVA_HOME      /usr/bin/java
 ENV PATH           ${PATH}:${JAVA_HOME}/bin
@@ -10,8 +10,8 @@ ENV PATH           ${PATH}:${JAVA_HOME}/bin
 ENV MATLAB_JAVA    ${JAVA_HOME}
 #默认安装路径为：/usr/local/MATLAB/MATLAB_Runtime
 ENV MCR_ROOT       /usr/local/MATLAB/MATLAB_Runtime
-ENV MCR_VERSION    R2017b
-ENV MCR_NUM        v93
+ENV MCR_VERSION    2019a
+ENV MCR_NUM        v96
 # Install MatLab runtime
 RUN cd /mcr-install \
     && ./install -mode silent -agreeToLicense yes -destinationFolder ${MCR_ROOT} \
