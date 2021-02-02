@@ -1,9 +1,7 @@
 FROM java:8-jre
 RUN mkdir /mcr-install \
    && cd /mcr-install \
-   && apt-get -y install libxmu6 \
-   && wget -O xrog-x11-lib.rpm http://rpmfind.net/linux/opensuse/ports/zsystems/tumbleweed/repo/oss/noarch/xorg-x11-libs-7.6.1-2.5.noarch.rpm \
-   && rpm -ivh xrog-x11-lib.rpm \
+   && apt-get -y install http://rpmfind.net/linux/opensuse/ports/zsystems/tumbleweed/repo/oss/noarch/xorg-x11-libs-7.6.1-2.5.noarch.rpm \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
     && unzip MATLAB_Runtime.zip
 # Set Java environment variables
