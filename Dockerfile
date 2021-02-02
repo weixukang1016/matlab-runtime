@@ -2,6 +2,7 @@ FROM java:8-jre
 #°²×°libxt
 ADD libxt_1.2.0.orig.tar.gz  /usr/local/libxt/
 RUN cd /usr/local/libxt \
+    && ls \
     && ./install
 RUN mkdir /mcr-install \
    && cd /mcr-install \
