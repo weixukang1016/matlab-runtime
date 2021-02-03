@@ -1,9 +1,11 @@
 FROM java:8-jre
+RUN apt update \
+ && apt install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils
 #°²×°libxt
-ADD libxt_1.2.0.orig.tar.gz  /usr/local/
-RUN cd /usr/local/libXt-1.2.0 \
+#ADD libxt_1.2.0.orig.tar.gz  /usr/local/
+#RUN cd /usr/local/libXt-1.2.0 \
 #    && chmod 777 ./INSTALL \
-    && make install
+#    && make install
 RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
