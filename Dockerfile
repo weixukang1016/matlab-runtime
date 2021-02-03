@@ -1,8 +1,8 @@
 FROM java:8-jre
-RUN echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list
-RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
-RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
-RUN apt-get -o Acquire::Check-Valid-Until=false update
+RUN sed -i -s'/ debian jessie-updates main / d'/etc/apt/sources.list \
+    && echo" deb http://archive.debian.org/debian jessie-backports main">> /etc/apt/sources.list \
+    && echo" Acquire :: Check-Valid-Until false;" > /etc/apt/apt.conf.d/10-nocheckvalid \
+    && echo'Package£º* \nPin£ºorigin" archive.debian.org" \nPin-Priority£º500'> / etc / apt / preferences.d / 10-archive-pin 
 RUN apt-get update && \
 	apt-get install -y xorg
 RUN mkdir /mcr-install \
