@@ -1,6 +1,6 @@
 FROM java:8-jre
-RUN apt update \
- && apt install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils
+RUN apt-get update && \
+	apt-get install -y curl wget unzip xorg
 #°²×°libxt
 #ADD libxt_1.2.0.orig.tar.gz  /usr/local/
 #RUN cd /usr/local/libXt-1.2.0 \
