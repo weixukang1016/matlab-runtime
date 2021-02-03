@@ -1,11 +1,6 @@
 FROM java:8-jre
 RUN apt-get update && \
-	apt-get install -y curl wget unzip xorg
-#°²×°libxt
-#ADD libxt_1.2.0.orig.tar.gz  /usr/local/
-#RUN cd /usr/local/libXt-1.2.0 \
-#    && chmod 777 ./INSTALL \
-#    && make install
+	apt-get install -y xorg
 RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
