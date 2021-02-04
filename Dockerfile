@@ -24,7 +24,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
     && sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list 
 
-RUN apt-get update --fix-missing -o Acquire::http::No-Cache=True && \
+#RUN apt-get update --fix-missing -o Acquire::http::No-Cache=True && \
+RUN apt-get -o Acquire::Check-Valid-Until=false update && \
 	apt-get install -y xorg
 RUN mkdir /mcr-install \
    && cd /mcr-install \
