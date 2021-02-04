@@ -1,26 +1,57 @@
 FROM centos:latest
-#下载java8
-RUN yum -y update \
-    && mkdir /usr/java \
-    && curl -L -k -b  "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.tar.gz  | gunzip -c | tar x \
-    && mv jdk1.8.0_172 /usr/java/jdk1.8.0_172 \
-    && yum -y install kde-l10n-Chinese && yum -y reinstall glibc-common \
-    && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 \
-    && /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo 'Asia/Shanghai' > /etc/timezone
-#设置jdk环境变量 
-ENV LANG zh_CN.UTF-8
-ENV LC_ALL zh_CN.UTF-8
-ENV JAVA_HOME /usr/java/jdk1.8.0_172
-ENV JRE_HOME /usr/java/jdk1.8.0_172/jre
-ENV PATH $PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-ENV CLASSPATH .:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
-
-CMD ["java -version"]
-
 RUN apt-get update && \
 	apt-get install -y xorg
 
+#下载java8
+
+# A few problems with compiling Java from source:
+#  1. Oracle.  Licensing prevents us from redistributing the official JDK.
+#  2. Compiling OpenJDK also requires the JDK to be installed, and it gets
+#       really hairy.
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		bzip2 \
+		unzip \
+		xz-utils \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
+
+# Default to UTF-8 file.encoding
+ENV LANG C.UTF-8
+
+# add a simple script that can auto-detect the appropriate JAVA_HOME value
+# based on whether the JDK or only the JRE is installed
+RUN { \
+		echo '#!/bin/sh'; \
+		echo 'set -e'; \
+		echo; \
+		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
+	} > /usr/local/bin/docker-java-home \
+	&& chmod +x /usr/local/bin/docker-java-home
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+
+ENV JAVA_VERSION 8u111
+ENV JAVA_DEBIAN_VERSION 8u111-b14-2~bpo8+1
+
+# see https://bugs.debian.org/775775
+# and https://github.com/docker-library/java/issues/19#issuecomment-70546872
+ENV CA_CERTIFICATES_JAVA_VERSION 20140324
+
+RUN set -x \
+	&& apt-get update \
+	&& apt-get install -y \
+		openjdk-8-jdk="$JAVA_DEBIAN_VERSION" \
+		ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION" \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
+
+# see CA_CERTIFICATES_JAVA_VERSION notes above
+RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
+
+
+#安装matlab-runtime
 RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
