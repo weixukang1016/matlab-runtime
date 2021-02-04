@@ -8,8 +8,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb-src http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list \
-    && echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list \
-    && echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
+    && echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list 
+    #&& echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 
 RUN apt-get update && \
 	apt-get install -y --fix-missing -o Acquire::http::No-Cache=True xorg
