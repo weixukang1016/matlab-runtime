@@ -29,7 +29,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
 #RUN apt-get update --fix-missing -o Acquire::http::No-Cache=True && \
 RUN apt-get clean \
   && apt-get -o Acquire::Check-Valid-Until=false update --fix-missing && \
-	apt-get install -y xorg
+	apt-get install -y --fix-missing xorg
 RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
