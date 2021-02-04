@@ -1,4 +1,4 @@
-FROM centos:lastest
+FROM centos:latest
 #ÏÂÔØjava8
 RUN yum -y update \
     && mkdir /usr/java \
