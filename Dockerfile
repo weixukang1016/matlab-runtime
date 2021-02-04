@@ -21,8 +21,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list \
     && echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
+    && echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
     && sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list 
-    #&& echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 
 RUN apt-get update --fix-missing -o Acquire::http::No-Cache=True && \
 	apt-get install -y xorg
