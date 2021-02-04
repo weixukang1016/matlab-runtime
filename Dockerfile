@@ -1,11 +1,9 @@
 FROM java:8-jre
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
-    && cat > /etc/apt/sources.list << EOF \
-    && deb http://mirrors.163.com/debian/ buster main contrib non-free \
-    && deb http://mirrors.163.com/debian/ buster-updates main contrib non-free \
-    && deb http://mirrors.163.com/debian/ buster-backports main contrib non-free \
-    && deb http://mirrors.163.com/debian-security buster/updates main contrib non-free \
-    && EOF
+    && echo "deb http://mirrors.163.com/debian/ buster main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.163.com/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.163.com/debian/ buster-backports main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.163.com/debian-security buster/updates main contrib non-free" >> /etc/apt/sources.list
 RUN apt-get update && \
 	apt-get install -y xorg
 RUN mkdir /mcr-install \
