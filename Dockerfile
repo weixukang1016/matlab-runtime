@@ -22,6 +22,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list \
     && echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
     && echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
+    && echo "Acquire::Check-Valid-Until false;" >> /etc/apt/apt.conf.d/10-nocheckvalid \
+    && echo 'Package£º* \nPin: origin "archive.debian.org" \nPin-Priority: 500' >> /etc/apt/preferences.d/10-archive-pin 
     && sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list 
 
 #RUN apt-get update --fix-missing -o Acquire::http::No-Cache=True && \
