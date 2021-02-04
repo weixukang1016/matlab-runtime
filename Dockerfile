@@ -2,6 +2,16 @@ FROM  java:openjdk-8-alpine
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     #&& sed -i 's#http://deb.debian.org#https://mirrors.ustc.edu.cn#g' /etc/apt/sources.list \
     #&& sed -i 's|security.debian.org/debian-security|mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list \
+    && gpg --keyserver wwwkeys.eu.pgp.net --recv-keys 648ACFD622F3D138 \
+    && gpg --armor --export 648ACFD622F3D138 | apt-key add - \
+    && gpg --keyserver wwwkeys.eu.pgp.net --recv-keys DCC9EFBF77E11517 \
+    && gpg --armor --export DCC9EFBF77E11517 | apt-key add - \
+    && gpg --keyserver wwwkeys.eu.pgp.net --recv-keys 04EE7237B7D453EC \
+    && gpg --armor --export 04EE7237B7D453EC | apt-key add - \
+    && gpg --keyserver wwwkeys.eu.pgp.net --recv-keys AA8E81B4331F7F50 \
+    && gpg --armor --export AA8E81B4331F7F50 | apt-key add - \
+    && gpg --keyserver wwwkeys.eu.pgp.net --recv-keys 112695A0E562B32A \
+    && gpg --armor --export 112695A0E562B32A | apt-key add - \
     && echo "deb http://mirrors.aliyun.com/debian/ buster main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb-src http://mirrors.aliyun.com/debian/ buster main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb-src http://mirrors.aliyun.com/debian-security buster/updates main" >> /etc/apt/sources.list \
@@ -11,8 +21,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list 
     #&& echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 
-RUN apt-get update && \
-	apt-get install -y --fix-missing -o Acquire::http::No-Cache=True xorg
+RUN apt-get update --fix-missing -o Acquire::http::No-Cache=True && \
+	apt-get install -y xorg
 RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
