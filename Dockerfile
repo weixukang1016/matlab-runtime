@@ -1,6 +1,12 @@
 FROM  java:8-jre
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
+    && echo "deb http://mirrors.ustc.edu.cn/debian/ buster main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.ustc.edu.cn/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.ustc.edu.cn/debian/ buster-backports main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.ustc.edu.cn/debian-security buster/updates main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 RUN apt-get update && \
-	apt-get install -y libxt6
+	apt-get install -y --fix-missing -o Acquire::http::No-Cache=True xorg
 RUN mkdir /mcr-install \
    && cd /mcr-install \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
