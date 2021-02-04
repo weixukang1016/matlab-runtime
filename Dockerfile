@@ -1,5 +1,5 @@
 FROM java:8-jre
-RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak ¡¢
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && cat > /etc/apt/sources.list << EOF \
     && deb http://mirrors.163.com/debian/ buster main contrib non-free \
     && deb http://mirrors.163.com/debian/ buster-updates main contrib non-free \
