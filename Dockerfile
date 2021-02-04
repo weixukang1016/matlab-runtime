@@ -1,6 +1,6 @@
 FROM centos:latest
-RUN apt-get update && \
-	apt-get install -y xorg
+#RUN apt-get update && \
+#	apt-get install -y xorg
 
 #ÏÂÔØjava8
 
