@@ -1,4 +1,6 @@
 FROM  java:8-jre
+RUN rm -fR /var/lib/apt/lists/* \
+  && mkdir /var/lib/apt/lists/partial
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     #&& sed -i 's#http://deb.debian.org#https://mirrors.ustc.edu.cn#g' /etc/apt/sources.list \
     #&& sed -i 's|security.debian.org/debian-security|mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list \
