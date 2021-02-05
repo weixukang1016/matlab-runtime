@@ -1,9 +1,7 @@
 FROM  java:8-jre
-RUN rm -fR /var/lib/apt/lists/* \
-  && mkdir /var/lib/apt/lists/partial
+#RUN rm -fR /var/lib/apt/lists/* \
+#  && mkdir /var/lib/apt/lists/partial
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
-    #&& sed -i 's#http://deb.debian.org#https://mirrors.ustc.edu.cn#g' /etc/apt/sources.list \
-    #&& sed -i 's|security.debian.org/debian-security|mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list \
     && gpg --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 \
     && gpg --armor --export 648ACFD622F3D138 | apt-key add - \
     && gpg --keyserver keyserver.ubuntu.com --recv-keys DCC9EFBF77E11517 \
@@ -21,9 +19,9 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb-src http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list \
-    && echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list \
-    && echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
-    && echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
+    #&& echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list \
+    #&& echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
+    #&& echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
     && echo "Acquire::Check-Valid-Until false;" >> /etc/apt/apt.conf.d/10-nocheckvalid \
     && echo 'Package: * \nPin: origin "archive.debian.org" \nPin-Priority: 500' >> /etc/apt/preferences.d/10-archive-pin \
     && sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list 
