@@ -32,8 +32,9 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
 RUN apt-get clean \
   && apt-get -o Acquire::Check-Valid-Until=false update --fix-missing && \
 	apt-get install -y --fix-missing libxt6
-RUN mkdir /mcr-install \
-   && cd /mcr-install \
+RUN mkdir /mcr-install
+COPY installer_input_2019a.txt /mcr-install
+RUN cd /mcr-install \
    && wget -O /mcr-install/MATLAB_Runtime.zip https://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_9_glnxa64.zip \
     && unzip MATLAB_Runtime.zip
 # Set Java environment variables
@@ -47,8 +48,8 @@ ENV MCR_VERSION    2019a
 ENV MCR_NUM        v96
 # Install MatLab runtime
 RUN cd /mcr-install \
-    && ./install -mode silent -agreeToLicense yes -destinationFolder ${MCR_ROOT} \
-    && cd / \
+    && ./install -inputFile installer_input_2019a.txt
+RUN cd / \
     && rm -rf /mcr-install
 # Set MCR environment variables
 ENV LD_LIBRARY_PATH    ${LD_LIBRARY_PATH}:\
